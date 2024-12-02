@@ -7,7 +7,7 @@ pub fn part2() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     defer _ = gpa.deinit();
 
-    const file = try std.fs.cwd().openFile("input.txt", .{});
+    const file = try std.fs.cwd().openFile("data/input.txt", .{});
     defer file.close();
 
     var buf_reader = std.io.bufferedReader(file.reader());
