@@ -57,7 +57,7 @@ pub fn part2() !void {
 
     const end_time = std.time.microTimestamp();
     std.debug.print("Elapsed time: {d:.3} ms\n", .{@as(f64, @floatFromInt(end_time - start_time)) / 1000.0});
-    std.debug.print("RESULT {}\n", .{acc});
+    std.debug.print("Result: {}\n", .{acc});
 }
 
 const Part1Processor = struct {
@@ -109,7 +109,7 @@ pub fn part1() !void {
 
     const end_time = std.time.microTimestamp();
     std.debug.print("Elapsed time: {d:.3} ms\n", .{@as(f64, @floatFromInt(end_time - start_time)) / 1000.0});
-    std.debug.print("Total safe sequences: {}\n", .{distance});
+    std.debug.print("Result: {}\n", .{distance});
 }
 
 pub fn parseInt(buffer: []const u8) u32 {
