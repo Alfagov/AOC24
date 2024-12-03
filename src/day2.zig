@@ -142,3 +142,10 @@ pub fn part1() !void {
     std.debug.print("Elapsed time: {d:.3} ms\n", .{@as(f64, @floatFromInt(end_time - start_time)) / 1000.0});
     std.debug.print("Total safe sequences: {}\n", .{processor.count});
 }
+
+pub fn main() !void {
+    std.debug.print("------- DAY 2 -- PART 1 -------\n", .{});
+    try part1();
+    std.debug.print("------- DAY 2 -- PART 2 -------\n", .{});
+    try part2();
+}

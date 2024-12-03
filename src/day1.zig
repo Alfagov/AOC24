@@ -148,3 +148,10 @@ pub fn parseNumber(buffer: []const u8) !u32 {
 
     return try std.fmt.parseInt(u32, buffer[0..idx], 10);
 }
+
+pub fn main() !void {
+    std.debug.print("------- DAY 1 -- PART 1 -------\n", .{});
+    try part1();
+    std.debug.print("------- DAY 1 -- PART 2 -------\n", .{});
+    try part2();
+}
