@@ -39,15 +39,6 @@ fn formatDuration(ns: u64) []const u8 {
     }
 }
 
-fn printPadding(txt: u8, n: usize) void {
-    var pad = std.heap.page_allocator.alloc(u8, n) catch @panic("OOM");
-    defer std.heap.page_allocator.free(pad);
-    for (0..n) |idx| {
-        pad[idx] = txt;
-    }
-    print("{s}", .{pad});
-}
-
 fn printStrPadding(txt: []const u8, n: usize) void {
     var pad = std.heap.page_allocator.alloc(u8, n * txt.len) catch @panic("OOM");
     defer std.heap.page_allocator.free(pad);
@@ -69,7 +60,7 @@ fn printHeader(text: []const u8) void {
     printStrPadding("═", total_width);
     print("╗{s}\n", .{Style.reset});
     print("{s}║", .{Style.cyan});
-    printPadding(' ', @intFromFloat(padding));
+    printStrPadding(" ", @intFromFloat(padding));
     print("{s}{s}{s}", .{
         Style.yellow ++ Style.bold,
         text,
@@ -137,17 +128,10 @@ fn printError(msg: []const u8) void {
 
 const SolutionFn = *const fn () anyerror!i64;
 
-const DaySolution = struct {
+pub const DaySolution = struct {
     part1: SolutionFn,
     part2: SolutionFn,
 };
-
-const solutions = std.StaticStringMap(DaySolution).initComptime(.{
-    .{ "1", .{ .part1 = Day1.part1, .part2 = Day1.part2 } },
-    .{ "2", .{ .part1 = Day2.part1, .part2 = Day2.part2 } },
-    .{ "3", .{ .part1 = Day3.part1, .part2 = Day3.part2 } },
-    .{ "4", .{ .part1 = Day4.part1, .part2 = Day4.part2 } },
-});
 
 pub fn timeFn(fun: *const fn() anyerror!i64) !struct { time: u64, result: i64} {
     const start_time = time.nanoTimestamp();
@@ -160,13 +144,17 @@ pub fn timeFn(fun: *const fn() anyerror!i64) !struct { time: u64, result: i64} {
     };
 }
 
-pub fn run(args: [][]u8) !void {
+pub fn run(args: [][]u8, solutions: std.StaticStringMap(DaySolution)) !void {
     if (args.len < 2) {
         printUsage(args[0]);
         return;
     }
 
     const command = args[1];
+    if (std.ascii.eqlIgnoreCase(command, "help") or std.ascii.eqlIgnoreCase(command, "h")) {
+        printUsage(args[0]);
+        return;
+    }
 
     var header: [128]u8 = undefined;
     if (std.ascii.eqlIgnoreCase(command, "day")) {
@@ -217,5 +205,7 @@ pub fn run(args: [][]u8) !void {
             timed_res = try timeFn(entry.part2);
             printResult(day, "2", timed_res.time, timed_res.result);
         }
+    } else {
+        printError("Invalid command");
     }
 }
