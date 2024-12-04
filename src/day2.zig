@@ -134,10 +134,3 @@ pub fn part1() !i64 {
 
     return @intCast(processor.count);
 }
-
-pub fn main() !void {
-    std.debug.print("------- DAY 2 -- PART 1 -------\n", .{});
-    try part1();
-    std.debug.print("------- DAY 2 -- PART 2 -------\n", .{});
-    try part2();
-}

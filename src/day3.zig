@@ -153,10 +153,3 @@ pub fn part2() !i64 {
 
     return @intCast(processor.accumulator);
 }
-
-pub fn main() !void {
-    std.debug.print("------- DAY 3 -- PART 1 -------\n", .{});
-    try part1();
-    std.debug.print("------- DAY 3 -- PART 2 -------\n", .{});
-    try part2();
-}
