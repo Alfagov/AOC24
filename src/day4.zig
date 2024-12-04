@@ -1,20 +1,6 @@
 const std = @import("std");
 const Utils = @import("utils.zig");
 
-const patterns = [_][2][]const u8{
-    .{ "MAS", "MAS" },
-    .{ "MAS", "SAM" },
-    .{ "SAM", "MAS" },
-    .{ "SAM", "SAM" },
-};
-
-const directions_part2 = [_][2]i8{
-    [_]i8{1, 1},
-    [_]i8{1, -1},
-    [_]i8{-1, 1},
-    [_]i8{-1, -1},
-};
-
 const dir_diag_lr = [_][2]i8{
     [_]i8{1, 1},
     [_]i8{-1, -1},

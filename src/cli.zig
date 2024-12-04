@@ -196,16 +196,21 @@ pub fn run(args: [][]u8, solutions: std.StaticStringMap(DaySolution)) !void {
             printError(try std.fmt.bufPrint(&header, "Day {s} not implemented", .{day}));
         }
     } else if (std.ascii.eqlIgnoreCase(command, "all")) {
+
         const solution_list = solutions.values();
         const solution_days = solutions.keys();
+
+        printHeader(try std.fmt.bufPrint(&header, "Running All Days: {d}", .{solution_days.len}));
         for (solution_list, solution_days) |entry, day| {
-            printHeader(try std.fmt.bufPrint(&header, "Running Day {s}", .{day}));
             var timed_res = try timeFn(entry.part1);
             printResult(day, "1", timed_res.time, timed_res.result);
             timed_res = try timeFn(entry.part2);
             printResult(day, "2", timed_res.time, timed_res.result);
+            print("\n", .{});
         }
+
     } else {
         printError("Invalid command");
     }
+    print("\n", .{});
 }
