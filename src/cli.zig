@@ -36,12 +36,16 @@ fn formatDuration(ns: u64) []const u8 {
 }
 
 fn printStrPadding(txt: []const u8, n: usize) void {
-    var pad = std.heap.page_allocator.alloc(u8, n * txt.len) catch @panic("OOM");
-    defer std.heap.page_allocator.free(pad);
+    // Skill issues
+    var pad_buf: [256]u8 = undefined;
+    var allocator = std.heap.FixedBufferAllocator.init(&pad_buf);
+    var pad = allocator.allocator().alloc(u8, n * txt.len) catch @panic("Buy more ram");
+    defer allocator.allocator().free(pad);
+
     var stream = std.io.fixedBufferStream(pad[0..]);
     var writer = stream.writer();
     for (0..n) |_| {
-        writer.writeAll(txt) catch @panic("No space left");
+        writer.writeAll(txt) catch @panic("Big mistake printing padding");
     }
 
     print("{s}", .{pad});
