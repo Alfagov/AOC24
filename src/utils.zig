@@ -53,6 +53,10 @@ pub const FileLineReaderAccumulator = struct {
 
     const Self = @This();
 
+    pub fn deinit(self: *Self) void {
+        self.file.close();
+    }
+
     pub fn init(path: []const u8) !Self {
         const file = try std.fs.cwd().openFile(path, .{});
         return Self{

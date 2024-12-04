@@ -117,30 +117,22 @@ const Part2Processor = struct {
     }
 };
 
-pub fn part2() !void {
-    const start_time = std.time.microTimestamp();
-
+pub fn part2() !i64 {
     var processor = Part2Processor{ .count = 0 };
     var file_reader = try Utils.FileLineReaderAccumulator.init("data/input2.txt");
 
     try file_reader.readFile(processor.getCallback());
 
-    const end_time = std.time.microTimestamp();
-    std.debug.print("Elapsed time: {d:.3} ms\n", .{@as(f64, @floatFromInt(end_time - start_time)) / 1000.0});
-    std.debug.print("Total safe sequences: {}\n", .{processor.count});
+    return @intCast(processor.count);
 }
 
-pub fn part1() !void {
-    const start_time = std.time.microTimestamp();
-
+pub fn part1() !i64 {
     var processor = Part1Processor{ .count = 0 };
     var file_reader = try Utils.FileLineReaderAccumulator.init("data/input2.txt");
 
     try file_reader.readFile(processor.getCallback());
 
-    const end_time = std.time.microTimestamp();
-    std.debug.print("Elapsed time: {d:.3} ms\n", .{@as(f64, @floatFromInt(end_time - start_time)) / 1000.0});
-    std.debug.print("Total safe sequences: {}\n", .{processor.count});
+    return @intCast(processor.count);
 }
 
 pub fn main() !void {

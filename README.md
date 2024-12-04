@@ -18,20 +18,29 @@ Each day's solution is implemented in [Zig](https://ziglang.org/), a robust and 
 
 1. Ensure [Zig](https://ziglang.org/download/) is installed on your system.
 
+2. Clone this repo
+   ```sh
+   git clone https://github.com/Alfagov/AOC24.git
+   ```
+3. Build
+   ```sh
+   zig build
+   ```
+4. Run
+   ```sh
+   ./zig-out/bin/AOC24 <command> [args]
+   ```
+
 To execute all solutions:
-
-2. Run the solution using Zig:
    ```sh
-   zig build run
+   ./zig-out/bin/AOC24 all
    ```
-To execute a solution:
 
-2. Navigate to the `src/` directory.
-3. Run the solution using Zig:
+To execute single solution:
    ```sh
-   zig run dayX.zig
+   ./zig-out/bin/AOC24 day X Y
    ```
-Replace XX with the day number (e.g., day1.zig for December 1st).
+Replace X with the day and Y with the part 1/2.
 
 Happy coding!
 

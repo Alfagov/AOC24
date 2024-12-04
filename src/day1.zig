@@ -47,8 +47,7 @@ const Part2Processor = struct {
     }
 };
 
-pub fn part2() !void {
-    const start_time = std.time.microTimestamp();
+pub fn part2() !i64 {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     defer _ = gpa.deinit();
 
@@ -61,13 +60,12 @@ pub fn part2() !void {
 
     var processor = Part2Processor{ .lhs = &left, .rhs = &right};
     var file_reader = try Utils.FileLineReaderAccumulator.init("data/input.txt");
+    defer file_reader.deinit();
 
     try file_reader.readFile(processor.getCallback());
     const distance = processor.calculateDistance();
 
-    const end_time = std.time.microTimestamp();
-    std.debug.print("Elapsed time: {d:.3} ms\n", .{@as(f64, @floatFromInt(end_time - start_time)) / 1000.0});
-    std.debug.print("Result: {}\n", .{distance});
+    return @intCast(distance);
 }
 
 
@@ -110,17 +108,14 @@ const Part1Processor = struct {
     }
 };
 
-pub fn part1() !void {
-    const start_time = std.time.microTimestamp();
+pub fn part1() !i64 {
     var processor = Part1Processor{};
     var file_reader = try Utils.FileLineReaderAccumulator.init("data/input.txt");
+    defer file_reader.deinit();
 
     try file_reader.readFile(processor.getCallback());
     const distance = processor.calculateDistance();
-
-    const end_time = std.time.microTimestamp();
-    std.debug.print("Elapsed time: {d:.3} ms\n", .{@as(f64, @floatFromInt(end_time - start_time)) / 1000.0});
-    std.debug.print("Result: {}\n", .{distance});
+    return @intCast(distance);
 }
 
 pub fn parseInt(buffer: []const u8) u32 {
@@ -150,8 +145,8 @@ pub fn parseNumber(buffer: []const u8) !u32 {
 }
 
 pub fn main() !void {
-    std.debug.print("------- DAY 1 -- PART 1 -------\n", .{});
+    //std.debug.print("------- DAY 1 -- PART 1 -------\n", .{});
     try part1();
-    std.debug.print("------- DAY 1 -- PART 2 -------\n", .{});
+    //std.debug.print("------- DAY 1 -- PART 2 -------\n", .{});
     try part2();
 }

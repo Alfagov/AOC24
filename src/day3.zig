@@ -136,28 +136,22 @@ const Part1Processor = struct {
     }
 };
 
-pub fn part1() !void {
-    const start_time = std.time.microTimestamp();
+pub fn part1() !i64 {
     var processor = Part1Processor{};
     var file_reader = try Utils.FileLineReaderAccumulator.init("data/input3.txt");
 
     try file_reader.readFile(processor.getCallback());
 
-    const end_time = std.time.microTimestamp();
-    std.debug.print("Elapsed time: {d:.3} ms\n", .{@as(f64, @floatFromInt(end_time - start_time)) / 1000.0});
-    std.debug.print("Result: {}\n", .{processor.accumulator});
+    return @intCast(processor.accumulator);
 }
 
-pub fn part2() !void {
-    const start_time = std.time.microTimestamp();
+pub fn part2() !i64 {
     var processor = Part2Processor{};
     var file_reader = try Utils.FileLineReaderAccumulator.init("data/input3.txt");
 
     try file_reader.readFile(processor.getCallback());
 
-    const end_time = std.time.microTimestamp();
-    std.debug.print("Elapsed time: {d:.3} ms\n", .{@as(f64, @floatFromInt(end_time - start_time)) / 1000.0});
-    std.debug.print("Result: {}\n", .{processor.accumulator});
+    return @intCast(processor.accumulator);
 }
 
 pub fn main() !void {
