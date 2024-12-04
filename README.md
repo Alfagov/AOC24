@@ -1,5 +1,7 @@
 # Advent of Code 2024 Solutions
 
+![img.png](assets/img.png)
+
 Welcome to my repository for the [Advent of Code 2024](https://adventofcode.com/) challenges! This collection showcases my solutions to the daily programming puzzles released throughout December 2024.
 
 ## Repository Structure

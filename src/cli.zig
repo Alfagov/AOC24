@@ -1,10 +1,6 @@
 const std = @import("std");
 const time = std.time;
 const print = std.debug.print;
-const Day1 = @import("day1.zig");
-const Day2 = @import("day2.zig");
-const Day3 = @import("day3.zig");
-const Day4 = @import("day4.zig");
 
 // ANSI escape codes for colors and formatting
 const Style = struct {
